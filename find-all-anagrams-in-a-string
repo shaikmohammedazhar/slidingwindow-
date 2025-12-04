@@ -1,0 +1,40 @@
+// sliding window problems 
+// leetcode problems 
+//https://leetcode.com/problems/find-all-anagrams-in-a-string/
+//solution:
+class Solution {
+    public boolean allzeros(int arr[]){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public List<Integer> findAnagrams(String s, String p) {
+        int a[]=new int[26];
+        //frequency store karli
+        for(int i=0;i<p.length();i++){
+            char ch=p.charAt(i);
+            a[ch-'a']++;
+        }
+        int start=0;int end=0;
+        int k=p.length();
+        ArrayList<Integer> al=new ArrayList<>();
+        //sliding window logic 
+        while(end<s.length()){
+            char ch=s.charAt(end);
+            a[ch-'a']--;
+            if(end-start+1==k){
+                if(allzeros(a)){
+                    al.add(start);
+                }
+                a[s.charAt(start)-'a']++;
+                start++;
+            }
+            end++;
+        }
+        return al;
+        
+    }
+}
