@@ -1,0 +1,21 @@
+// longest subarray sum and sliding window template better solution
+class Main {
+    public static void main(String[] args) {
+        int arr[]={2,3,10,10,6,7};
+        int n=arr.length;
+        int k=14;
+        int l=0, r=0, maxlen=0,sum=0;
+        while(r<n){
+            sum=sum+arr[r];
+            while(sum>k){
+                sum=sum-arr[l];
+                l++;
+            }
+            if(sum<=k){
+                maxlen=Math.max(maxlen,r-l+1);
+            }
+            r++;
+        }
+        System.out.print(maxlen);
+    }
+}
